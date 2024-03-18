@@ -43,16 +43,10 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
             })
 
         }).catch(error => {
-            res.status(400 ).json({
-                message: "Something went wrong while fetching data",
-                error: error.message
-            })
+            next(new AppError(400, error.message))
         })
     } catch (error) {
-        res.status(500).json({
-            message:"Something went wrong",
-            error: error
-        })
+        next(new AppError(400, error.message))
     }
 }
 
@@ -75,10 +69,7 @@ export const getSingleData = async (req: Request ,res: Response, next: NextFunct
             // })
         })
     } catch (error) {
-        res.status(500).json({
-            message:"Something went wrong",
-            error: error
-        })
+        next(new AppError(400, error.message))
     }
 }
 
