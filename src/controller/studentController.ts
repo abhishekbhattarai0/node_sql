@@ -7,8 +7,9 @@ const StudentRepo = AppDataSource.getRepository(student)
 
 
 export const getdata = async (req: Request ,res: Response, next: NextFunction ) => {
+    // #swagger.tags = ['student']
     try {
-        await StudentRepo.findOneBy({id:req.params.id}).then( result => {
+        await StudentRepo.find().then( result => {
 
             res.status(200).json({
                 message: " Student data has been fetched successfully",
@@ -54,7 +55,7 @@ export const getSingleData = async (req: Request ,res: Response, next: NextFunct
     try {
         console.log(req.body)
         console.log(req.params)
-        await StudentRepo.save(req.body).then( result => {
+        await StudentRepo.findOneBy({id:req.params.id}).then( result => {
             res.status(200).json({
                 message: " Student data has been fetched successfully",
                 data: result
@@ -67,6 +68,28 @@ export const getSingleData = async (req: Request ,res: Response, next: NextFunct
             //     message: "Something went wrong while fetching data",
             //     error: error.message
             // })
+        })
+    } catch (error) {
+        next(new AppError(400, error.message))
+    }
+}
+
+export const deleteData = async (req: Request, res:Response, next: NextFunction) => {
+    try {
+        let Data = await StudentRepo.findOneBy({id:req.params.id});
+
+        if(!Data){
+            return next(new AppError(400, 'data with this id not found'))
+        }
+
+        await StudentRepo.softRemove(Data).then( result=>{
+            res.status(200).json({
+                message: " Student data has been deleted successfully",
+                data: result
+            })
+        }).catch(err=>{
+        next(new AppError(400, err.message))
+
         })
     } catch (error) {
         next(new AppError(400, error.message))

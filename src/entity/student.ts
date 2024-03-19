@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm"
 
 @Entity() //define as table
 export class student {
@@ -15,4 +15,12 @@ export class student {
     @Column()
     age: number
 
+    @DeleteDateColumn()
+    deleteDate: Date
+
+    @CreateDateColumn()
+    createdAt: Date
+
+    @UpdateDateColumn()
+    updatedAt: Date
 }

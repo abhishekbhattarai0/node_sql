@@ -1,3 +1,5 @@
+import * as swaggerFile from "./swagger-output.json"
+import * as swaggerUiExpress from "swagger-ui-express"
 import * as express from "express"
 import * as bodyParser from "body-parser"
 import { Request, Response , NextFunction} from "express"
@@ -27,9 +29,10 @@ AppDataSource.initialize().then(async () => {
     app.get("/",(req: Request, res: Response, next: NextFunction) => {
         res.json({message: "Abhishek"})
     })
-    app.use('/student', studentRoutes)
+    app.use(studentRoutes)
 
-
+    // swagger
+    app.use('/api',swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerFile))
     // all handle route
     app.all("*", (req: Request, res: Response, next: NextFunction ) => {
         next(new AppError(404, `route ${req.originalUrl} Not Found`))

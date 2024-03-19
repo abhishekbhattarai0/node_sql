@@ -1,10 +1,15 @@
 import * as express from 'express';
-import {getSingleData, getdata, postData} from '../controller/studentController'
+import {deleteData, getSingleData, getdata, postData} from '../controller/studentController'
 
 const router = express.Router();
-router.route('/').get(getdata).post(postData);
 
-router.route('/:id').get(getSingleData)
+    // #swagger.tags = ["student"]
+    // @Api(tags='student')
+
+router.route('/student/').get(getdata).post(postData); 
+
+router.route('/student/:id').get(getSingleData).delete(deleteData)
+
 
 
 export default router;
