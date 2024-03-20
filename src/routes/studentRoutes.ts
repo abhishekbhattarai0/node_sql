@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {deleteData, getSingleData, getdata, postData} from '../controller/studentController'
+import {deleteData, getSingleData, getdata, postData, updateData} from '../controller/studentController'
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route('/student/').get(getdata).post(postData); 
 
-router.route('/student/:id').get(getSingleData).delete(deleteData)
+router.route('/student/:id').get(getSingleData).delete(deleteData).patch(updateData)
 
 
 

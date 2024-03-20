@@ -1,18 +1,18 @@
 import {Request, Response, NextFunction} from 'express';
 import { AppDataSource } from '../data-source';
-import { student } from '../entity/student';
+import { Teacher } from '../entity/Teacher';
 import { AppError } from '../utils/AppError';
 
-const StudentRepo = AppDataSource.getRepository(student)
+const TeacherRepo = AppDataSource.getRepository(Teacher)
 
 
 export const getdata = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['teacher']
     try {
-        await StudentRepo.find().then( (result) => {
+        await TeacherRepo.find().then( (result) => {
 
             res.status(200).json({
-                message: " Student data has been fetched successfully",
+                message: " Teacher data has been fetched successfully",
                 data: result
             })
         }).catch(error => {
@@ -37,12 +37,12 @@ export const getdata = async (req: Request ,res: Response, next: NextFunction ) 
 
 
 export const postData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['teacher']
     try {
         console.log(req.body)
-        await StudentRepo.save(req.body).then( result => {
+        await TeacherRepo.save(req.body).then( result => {
             res.status(200).json({
-                message: " Student data has been fetched successfully",
+                message: " Teacher data has been fetched successfully",
                 data: result
             })
 
@@ -55,13 +55,13 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
 }
 
 export const getSingleData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['teacher']
     try {
         console.log(req.body)
         console.log(req.params)
-        await StudentRepo.findOneBy({id:req.params.id}).then( result => {
+        await TeacherRepo.findOneBy({id:req.params.id}).then( result => {
             res.status(200).json({
-                message: " Student data has been fetched successfully",
+                message: " Teacher data has been fetched successfully",
                 data: result
             })
 
@@ -79,17 +79,17 @@ export const getSingleData = async (req: Request ,res: Response, next: NextFunct
 }
 
 export const deleteData = async (req: Request, res:Response, next: NextFunction) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['teacher']
     try {
-        let Data = await StudentRepo.findOneBy({id:req.params.id});
+        let Data = await TeacherRepo.findOneBy({id:req.params.id});
 
         if(!Data){
             return next(new AppError(400, 'data with this id not found'))
         }
 
-        await StudentRepo.softRemove(Data).then( result=>{
+        await TeacherRepo.softRemove(Data).then( result=>{
             res.status(200).json({
-                message: " Student data has been deleted successfully",
+                message: " Teacher data has been deleted successfully",
                 data: result
             })
         }).catch(err=>{
@@ -103,19 +103,19 @@ export const deleteData = async (req: Request, res:Response, next: NextFunction)
 
 
 export const updateData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['teacher']
     try {
         
-       let data = await StudentRepo.findOneBy({id:req.params.id});
+       let data = await TeacherRepo.findOneBy({id:req.params.id});
 
        if(!data){
-        next(new AppError(404, "data with this id doesnot exist "))
+        return next(new AppError(404, "data with this id doesnot exist "))
        }
 
        Object.assign(data, req.body);
-       await StudentRepo.save(data).then( (result) => {
+       await TeacherRepo.save(data).then( (result) => {
         res.status(200).json({
-            message: "Student data has been updated",
+            message: "Teacher data has been updated",
             data: result
         })
         }).catch( (error)=> {

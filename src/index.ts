@@ -11,6 +11,7 @@ import * as cors from 'cors'
 
 
 import studentRoutes from './routes/studentRoutes'
+import TeacherRoutes from './routes/teacherRoutes'
 
 import { AppError } from "./utils/AppError"
 
@@ -31,9 +32,12 @@ AppDataSource.initialize().then(async () => {
     })
     app.use(studentRoutes)
 
+    app.use(TeacherRoutes)
+
     // swagger
     app.use('/api',swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerFile))
     // all handle route
+    // what is this function doing
     app.all("*", (req: Request, res: Response, next: NextFunction ) => {
         next(new AppError(404, `route ${req.originalUrl} Not Found`))
     })
