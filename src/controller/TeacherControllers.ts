@@ -34,10 +34,33 @@ export const getdata = async (req: Request ,res: Response, next: NextFunction ) 
     }
 }
 
+const doc={
+    components: {
+        schemas: {
+            some: {
+                firstName: 'Ashish',
+                lastName: 'Pantha',
+                age: 29
+            }
+        }
+    }
+}
 
 
 export const postData = async (req: Request ,res: Response, next: NextFunction ) => {
     // #swagger.tags = ['teacher']
+    // #swagger.autoBody = false
+    /* #swagger.requestBody = {
+        required: true,
+        content: {
+            "multipart/form-data": {
+                schema: {
+                    $ref:"#components/schemas/studentSchema"
+                }
+            }
+        }
+    }
+    */
     try {
         console.log(req.body)
         await TeacherRepo.save(req.body).then( result => {

@@ -1,5 +1,7 @@
 // import SwaggerAutogen from 'swagger-autogen'
-const SwaggerAutogen = require("swagger-autogen")()
+const SwaggerAutogen = require("swagger-autogen")({
+    openapi: "3.0.0"
+})
 
 const doc = {
     info: {
@@ -10,9 +12,48 @@ const doc = {
         {
             name:'student',
             description:''
+        },
+        {
+            name:'teacher',
+            description: ''
         }
+        
     ],
-    host: 'localhost:3000'
+    components: {
+        schemas: {
+            studentSchema: {
+                $firstName: "Abhi",
+                $lastName: "Bhattarai",
+                age: 21,
+                
+            },
+            teacherSchema: {
+                $firstName: "Ashish",
+                $lastName: "Pantha",
+                age: 29
+            }
+        },
+        examples: {
+            studentExample: {
+                value: {
+                firstName: "Abhi",
+                lastName: "Bhattarai",
+                age: 21
+                },
+                summary: "Examples of students"
+            },
+            teacherExample: {
+                value: {
+                firstName: "Ashish",
+                lastName: "Pantha",
+                age: 29
+                },
+                summary: "Examples of Teachers"
+            }
+        }
+    },
+    host: 'localhost:3000',
+    
 }
 
 const outputFile = './swagger-output.json'

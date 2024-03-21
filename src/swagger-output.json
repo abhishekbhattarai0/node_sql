@@ -1,20 +1,24 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "api documentation",
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
   "tags": [
     {
       "name": "student",
       "description": ""
+    },
+    {
+      "name": "teacher",
+      "description": ""
     }
-  ],
-  "schemes": [
-    "http"
   ],
   "paths": {
     "/student/": {
@@ -35,8 +39,18 @@
         ],
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#components/schemas/studentSchema"
+              }
+            }
           }
         }
       }
@@ -52,7 +66,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -71,7 +87,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -90,7 +108,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -121,6 +141,16 @@
           "200": {
             "description": "OK"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#components/schemas/studentSchema"
+              }
+            }
+          }
         }
       }
     },
@@ -135,7 +165,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -154,7 +186,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -173,7 +207,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -181,6 +217,70 @@
             "description": "OK"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "studentSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Abhi"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Bhattarai"
+          },
+          "age": {
+            "type": "number",
+            "example": 21
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      },
+      "teacherSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Ashish"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Pantha"
+          },
+          "age": {
+            "type": "number",
+            "example": 29
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName"
+        ]
+      }
+    },
+    "examples": {
+      "studentExample": {
+        "value": {
+          "firstName": "Abhi",
+          "lastName": "Bhattarai",
+          "age": 21
+        },
+        "summary": "Examples of students"
+      },
+      "teacherExample": {
+        "value": {
+          "firstName": "Ashish",
+          "lastName": "Pantha",
+          "age": 29
+        },
+        "summary": "Examples of Teachers"
       }
     }
   }

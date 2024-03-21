@@ -36,8 +36,34 @@ export const getdata = async (req: Request ,res: Response, next: NextFunction ) 
 
 
 
+const doc={
+    components:{
+        schemas:{
+            some:{
+                firstName:'kisan mahat',
+                lastName:"mahahsa",
+                age:23
+            }
+        }
+    }
+}
+
 export const postData = async (req: Request ,res: Response, next: NextFunction ) => {
     // #swagger.tags = ['student']
+    // #swagger.autoBody = false
+    /* #swagger.requestBody = {
+           required: true,
+           content: {
+            "multipart/form-data": {
+                schema: {
+                    $ref:"#components/schemas/studentSchema"
+                 },
+                }
+            }
+           }
+           
+    }
+    */
     try {
         console.log(req.body)
         await StudentRepo.save(req.body).then( result => {
