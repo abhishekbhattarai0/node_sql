@@ -25,6 +25,8 @@ AppDataSource.initialize().then(async () => {
     app.use(morgan("dev")) //morgan is http request logger middleware for node
 
     app.use(cors({origin:'*'}))
+
+    app.use("/public", express.static("src/public"))
     
     // register express routes from defined application routes
     app.get("/",(req: Request, res: Response, next: NextFunction) => {

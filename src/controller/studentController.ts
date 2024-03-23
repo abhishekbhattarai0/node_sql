@@ -65,7 +65,8 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
     }
     */
     try {
-        console.log(req.body)
+        console.log(req.body, req.file, req.files)
+
         await StudentRepo.save(req.body).then( result => {
             res.status(200).json({
                 message: " Student data has been fetched successfully",

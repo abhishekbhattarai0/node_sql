@@ -34,17 +34,17 @@ export const getdata = async (req: Request ,res: Response, next: NextFunction ) 
     }
 }
 
-const doc={
-    components: {
-        schemas: {
-            some: {
-                firstName: 'Ashish',
-                lastName: 'Pantha',
-                age: 29
-            }
-        }
-    }
-}
+// const doc={
+//     components: {
+//         schemas: {
+//             some: {
+//                 firstName: 'Ashish',
+//                 lastName: 'Pantha',
+//                 age: 29
+//             }
+//         }
+//     }
+// }
 
 
 export const postData = async (req: Request ,res: Response, next: NextFunction ) => {
@@ -62,10 +62,11 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
     }
     */
     try {
-        console.log(req.body)
+        console.log(req.body, req.file)
+        req.body.profile = req.file.filename
         await TeacherRepo.save(req.body).then( result => {
             res.status(200).json({
-                message: " Teacher data has been fetched successfully",
+                message: " Teacher data has been posted successfully",
                 data: result
             })
 

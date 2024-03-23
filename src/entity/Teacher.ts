@@ -15,6 +15,9 @@ export class Teacher {
     @Column()
     age: number
 
+    @Column({nullable: true})
+    profile:string
+
     @DeleteDateColumn()
     deleteDate: Date
 
@@ -23,4 +26,6 @@ export class Teacher {
 
     @UpdateDateColumn()
     updatedAt: Date
+
+    
 }

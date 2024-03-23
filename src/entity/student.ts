@@ -15,6 +15,8 @@ export class student {
     @Column()
     age: number
 
+
+
     @DeleteDateColumn()
     deleteDate: Date
 
