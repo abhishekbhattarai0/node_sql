@@ -12,6 +12,8 @@ import * as cors from 'cors'
 
 import studentRoutes from './routes/studentRoutes'
 import TeacherRoutes from './routes/teacherRoutes'
+import UserProfileRoutes from './routes/UserProfileRoutes'
+import LoginRoute from './routes/LoginRoute'
 
 import { AppError } from "./utils/AppError"
 
@@ -35,6 +37,10 @@ AppDataSource.initialize().then(async () => {
     app.use(studentRoutes)
 
     app.use(TeacherRoutes)
+
+    app.use(UserProfileRoutes)
+
+    app.use(LoginRoute)
 
     // swagger
     app.use('/api',swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerFile))
