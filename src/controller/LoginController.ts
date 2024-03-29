@@ -1,3 +1,4 @@
+import * as jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { Login } from "../entity/Login";
@@ -42,14 +43,22 @@ export const postDataRegister = async ( req: Request, res: Response, next: NextF
 
 export const postDataLogin = async ( req: Request, res: Response, next: NextFunction) => {
     try {
-        let data= LoginRepo.findOneBy( {email: req.body.email});
-        bcrypt.compare( req.body.password,(await data).password , function(err, data){
+        let data= await LoginRepo.findOneBy( {email: req.body.email});
+        bcrypt.compare( req.body.password,data.password , function(err, datas){
             if(err){
         next(new AppError(400, err.message))
             }
-           if(data){
+
+            console.log(datas)
+           if(datas){
+            let jwtToken = jwt.sign({
+                id: data.id,
+                email: data.email
+            },'abcdefghijskkdjf'
+            )
             res.status(200).json({
-                message:" Login sucessfull"
+                message:" Login sucessfull",
+                token: jwtToken
             })
            }else{
         next(new AppError(400, 'email or password doesnt match'))
