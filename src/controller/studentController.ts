@@ -3,6 +3,10 @@ import { AppDataSource } from '../data-source';
 import { student } from '../entity/student';
 import { AppError } from '../utils/AppError';
 
+
+import SENDMAIL from '../utils/mail';
+import HTML_templete from '../view/mailTemplete';
+
 const StudentRepo = AppDataSource.getRepository(student)
 
 
@@ -68,6 +72,20 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
         console.log(req.body, req.file, req.files)
 
         await StudentRepo.save(req.body).then( result => {
+            const message = 'Hello';
+            const options = {
+                from: 'THANK YOU <abhisheknormal254@gmail.com>',
+                to: 'kandelbinod634@gmail.com',
+                subject: 'Greetings',
+                text:message,
+                html: HTML_templete(message, 'greeting')
+            }
+
+            SENDMAIL(options, (info)=> {
+                console.log("Email sent")
+                return console.log("message Id : ", info.messageId)
+            })
+
             res.status(200).json({
                 message: " Student data has been fetched successfully",
                 data: result
