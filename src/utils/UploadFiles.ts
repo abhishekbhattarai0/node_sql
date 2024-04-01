@@ -1,5 +1,5 @@
 import * as multer from 'multer';
-import { Request, Response,  } from 'express';
+// import { Request, Response,  } from 'express';
 
 // const storage = multer.diskStorage({
 //     destination: function(req: Request, file: Express.Multer.File, cb){
@@ -11,4 +11,5 @@ import { Request, Response,  } from 'express';
 // })
 
 const storage = multer.memoryStorage()
-export const upload = multer({storage:storage});
+let data = multer({storage:storage});
+export const upload=data
