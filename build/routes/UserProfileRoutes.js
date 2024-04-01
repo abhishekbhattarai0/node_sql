@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var UserProfileController_1 = require("../controller/UserProfileController");
-var UploadFiles_1 = require("../utils/UploadFiles");
 var router = express.Router();
 // #swagger.tags = ["student"]
 // @Api(tags='student')
-router.route('/userprofile/').get(UserProfileController_1.getdata).post(UploadFiles_1.upload.single("profile"), UserProfileController_1.postData);
+router.route('/userprofile/').get(UserProfileController_1.getdata).post(UserProfileController_1.postData);
 // router.route('/student/').get(getdata).post(upload.fields([
 //     {
 //         name:"profile"

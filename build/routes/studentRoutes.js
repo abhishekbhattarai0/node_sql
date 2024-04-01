@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var studentController_1 = require("../controller/studentController");
-var UploadFiles_1 = require("../utils/UploadFiles");
+// import { upload } from '../utils/UploadFiles';
 var ValidateRoute_1 = require("../utils/ValidateRoute");
 var router = express.Router();
 // #swagger.tags = ["student"]
 // @Api(tags='student')
-router.route('/student/').get(ValidateRoute_1.default, studentController_1.getdata).post(UploadFiles_1.upload.single("profile"), studentController_1.postData);
+router.route('/student/').get(ValidateRoute_1.default, studentController_1.getdata).post(studentController_1.postData);
 // router.route('/student/').get(getdata).post(upload.fields([
 //     {
 //         name:"profile"

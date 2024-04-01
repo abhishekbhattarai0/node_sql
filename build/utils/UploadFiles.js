@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.upload = void 0;
-var multer = require("multer");
+// import * as multer from 'multer';
 // import { Request, Response,  } from 'express';
 // const storage = multer.diskStorage({
 //     destination: function(req: Request, file: Express.Multer.File, cb){
@@ -11,7 +8,7 @@ var multer = require("multer");
 //         cb(null, file.originalname)
 //     }
 // })
-var storage = multer.memoryStorage();
-var data = multer({ storage: storage });
-exports.upload = data;
+// const storage = multer.memoryStorage()
+// let data = multer({storage:storage});
+// export const upload=data
 //# sourceMappingURL=UploadFiles.js.map
