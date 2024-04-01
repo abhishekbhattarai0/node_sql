@@ -54,7 +54,7 @@ export const postDataLogin = async ( req: Request, res: Response, next: NextFunc
             let jwtToken = jwt.sign({
                 id: data.id,
                 email: data.email
-            },'abcdefghijskkdjf'
+            },'secretKey'
             )
             res.status(200).json({
                 message:" Login sucessfull",

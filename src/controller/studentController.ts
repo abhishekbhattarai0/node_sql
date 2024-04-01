@@ -5,10 +5,13 @@ import { AppError } from '../utils/AppError';
 
 const StudentRepo = AppDataSource.getRepository(student)
 
-
-export const getdata = async (req: Request ,res: Response, next: NextFunction ) => {
+interface RequestCustom extends Request{
+    user: any
+}
+export const getdata = async (req: RequestCustom ,res: Response, next: NextFunction ) => {
     // #swagger.tags = ['student']
     try {
+        console.log(req.user)
         await StudentRepo.find().then( (result) => {
 
             res.status(200).json({
