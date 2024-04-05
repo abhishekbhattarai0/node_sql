@@ -1,18 +1,21 @@
 import {Request, Response, NextFunction} from 'express';
 import { AppDataSource } from '../data-source';
-import { UserProfile } from '../entity/UserProfile';
 import { AppError } from '../utils/AppError';
-import * as bcrypt from 'bcryptjs';
-const UserProfileRepo = AppDataSource.getRepository(UserProfile)
+import { employ } from '../entity/employ';
 
+const EmployRepo = AppDataSource.getRepository(employ)
 
-export const getdata = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['UserProfile']
+interface RequestCustom extends Request{
+    user: any
+}
+export const getdata = async (req: RequestCustom ,res: Response, next: NextFunction ) => {
+    // #swagger.tags = ['Employ']
     try {
-        await UserProfileRepo.find().then( (result) => {
+        console.log(req.user)
+        await EmployRepo.find().then( (result) => {
 
             res.status(200).json({
-                message: " Student data has been fetched successfully",
+                message: " Employ data has been fetched successfully",
                 data: result
             })
         }).catch(error => {
@@ -49,14 +52,14 @@ const doc={
 }
 
 export const postData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['UserProfile']
+    // #swagger.tags = ['Employ']
     // #swagger.autoBody = false
     /* #swagger.requestBody = {
            required: true,
            content: {
             "multipart/form-data": {
                 schema: {
-                    $ref:"#components/schemas/UserProfileSchema"
+                    $ref:"#components/schemas/EmploySchema"
                  },
                 }
             }
@@ -66,34 +69,30 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
     */
     try {
         console.log(req.body, req.file, req.files)
-
-        await bcrypt.hash(req.body.password, 10, function(err, hash) {
-            console.log(hash)
-            req.body.password = hash
-             UserProfileRepo.save(req.body).then( result => {
-                res.status(200).json({
-                    message: " Student data has been fetched successfully",
-                    data: result
-                })
-    
-            }).catch(error => {
-                next(new AppError(400, error.message))
-            })
-        })
         
+        await EmployRepo.save(req.body).then( result => {
+            res.status(200).json({
+                message: " Employ data has been fetched successfully",
+                data: result
+            })
+
+        }).catch(error => {
+            next(new AppError(400, error.message))
+        })
     } catch (error) {
         next(new AppError(400, error.message))
     }
 }
 
 export const getSingleData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['Employ']
     try {
+
         console.log(req.body)
         console.log(req.params)
-        await UserProfileRepo.findOneBy({id:req.params.id}).then( result => {
+        await EmployRepo.findOneBy({id:req.params.id}).then( result => {
             res.status(200).json({
-                message: " Student data has been fetched successfully",
+                message: " Employ data has been fetched successfully",
                 data: result
             })
 
@@ -111,17 +110,17 @@ export const getSingleData = async (req: Request ,res: Response, next: NextFunct
 }
 
 export const deleteData = async (req: Request, res:Response, next: NextFunction) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['Employ']
     try {
-        let Data = await UserProfileRepo.findOneBy({id:req.params.id});
+        let Data = await EmployRepo.findOneBy({id:req.params.id});
 
         if(!Data){
             return next(new AppError(400, 'data with this id not found'))
         }
 
-        await UserProfileRepo.softRemove(Data).then( result=>{
+        await EmployRepo.softRemove(Data).then( result=>{
             res.status(200).json({
-                message: " Student data has been deleted successfully",
+                message: " Employ data has been deleted successfully",
                 data: result
             })
         }).catch(err=>{
@@ -135,19 +134,19 @@ export const deleteData = async (req: Request, res:Response, next: NextFunction)
 
 
 export const updateData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['Employ']
     try {
         
-       let data = await UserProfileRepo.findOneBy({id:req.params.id});
+       let data = await EmployRepo.findOneBy({id:req.params.id});
 
        if(!data){
         next(new AppError(404, "data with this id doesnot exist "))
        }
 
        Object.assign(data, req.body);
-       await UserProfileRepo.save(data).then( (result) => {
+       await EmployRepo.save(data).then( (result) => {
         res.status(200).json({
-            message: "Student data has been updated",
+            message: "Employ data has been updated",
             data: result
         })
         }).catch( (error)=> {

@@ -14,6 +14,7 @@ import studentRoutes from './routes/studentRoutes'
 import TeacherRoutes from './routes/teacherRoutes'
 import UserProfileRoutes from './routes/UserProfileRoutes'
 import LoginRoute from './routes/LoginRoute'
+import LibraryRoute from './routes/LibraryRoute'
 
 import { AppError } from "./utils/AppError"
 
@@ -42,6 +43,8 @@ AppDataSource.initialize().then(async () => {
 
     app.use(LoginRoute)
 
+    app.use(LibraryRoute)
+
     // swagger
     app.use('/api',swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerFile))
     // all handle route
@@ -68,6 +71,6 @@ AppDataSource.initialize().then(async () => {
     // insert new users for test
     
 
-    console.log("Express server has started on port 3000. Open http://localhost:3000/ to see results")
+    console.log("Express server has started on port 3000. Open http://localhost:3000/api to see results")
 
 }).catch(error => console.log(error))

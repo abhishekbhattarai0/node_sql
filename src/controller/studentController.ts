@@ -69,7 +69,7 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
     */
     try {
         console.log(req.body, req.file, req.files)
-
+        req.body.employ = [req.body.employ]
         await StudentRepo.save(req.body).then( result => {
             res.status(200).json({
                 message: " Student data has been fetched successfully",
@@ -87,6 +87,7 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
 export const getSingleData = async (req: Request ,res: Response, next: NextFunction ) => {
     // #swagger.tags = ['student']
     try {
+
         console.log(req.body)
         console.log(req.params)
         await StudentRepo.findOneBy({id:req.params.id}).then( result => {

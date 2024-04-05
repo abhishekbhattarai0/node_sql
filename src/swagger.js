@@ -16,6 +16,10 @@ const doc = {
         {
             name:'teacher',
             description: ''
+        },
+        {
+            name:'UserProfile',
+            description:''
         }
         
     ],
@@ -31,6 +35,12 @@ const doc = {
                 $firstName: "Ashish",
                 $lastName: "Pantha",
                 age: 29
+            },
+            UserProfileSchema: {
+                $firstName: "firstName",
+                $lastName: "lastName",
+                age: 22,
+                $password: 'password'
             }
         },
         examples: {
@@ -49,6 +59,14 @@ const doc = {
                 age: 29
                 },
                 summary: "Examples of Teachers"
+            },
+            UserProfileExample: {
+                value: {
+                firstName: "Ashish",
+                lastName: "Pantha",
+                age: 29,
+                $password:"password"
+                }
             }
         }
     },
@@ -57,6 +75,6 @@ const doc = {
 }
 
 const outputFile = './swagger-output.json'
-const routes = ['./routes/studentRoutes','./routes/teacherRoutes']
+const routes = ['./routes/studentRoutes','./routes/teacherRoutes','./routes/UserProfileRoutes']
 
 SwaggerAutogen(outputFile, routes, doc)

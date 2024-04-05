@@ -2,14 +2,23 @@ import {Request, Response, NextFunction} from 'express';
 import { AppDataSource } from '../data-source';
 import { Teacher } from '../entity/Teacher';
 import { AppError } from '../utils/AppError';
+import { student } from '../entity/student';
+import { Library } from '../entity/Library';
+import { Equal } from 'typeorm';
 
 const TeacherRepo = AppDataSource.getRepository(Teacher)
+const StudentRepo = AppDataSource.getRepository(student)
+const LibraryRepo = AppDataSource.getRepository(Library)
 
 
 export const getdata = async (req: Request ,res: Response, next: NextFunction ) => {
     // #swagger.tags = ['teacher']
     try {
-        await TeacherRepo.find().then( (result) => {
+        await TeacherRepo.find({
+            relations:{
+                student:true
+            }
+        }).then( (result) => {
 
             res.status(200).json({
                 message: " Teacher data has been fetched successfully",
@@ -63,7 +72,13 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
     */
     try {
         console.log(req.body, req.file)
-        req.body.profile = req.file.filename
+        // req.body.profile = req.file.filename
+        
+        let student = await StudentRepo.findOneBy({id: Equal(req.body.student)})
+        let library = await LibraryRepo.findOneBy({id: req.body.library})
+        req.body.student = student
+        console.log(student,library)
+        req.body.teacher = library
         await TeacherRepo.save(req.body).then( result => {
             res.status(200).json({
                 message: " Teacher data has been posted successfully",
@@ -71,6 +86,7 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
             })
 
         }).catch(error => {
+            console.log(error)
             next(new AppError(400, error.message))
         })
     } catch (error) {

@@ -6,6 +6,7 @@ import { student } from "./entity/student"
 import { Teacher } from "./entity/Teacher"
 import { UserProfile } from "./entity/UserProfile"
 import { Login } from "./entity/Login"
+import { Library } from "./entity/Library"
   // type: "mysql",
     // host: "localhost",
     // port: 3306,
@@ -18,7 +19,7 @@ export const AppDataSource = new DataSource({
     // url:"postgres://default:OcQg86XBeIhW@ep-bitter-hat-a47pcfew-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
     synchronize: false,
     logging: false,
-    entities: [User, employ, student, Teacher, UserProfile, Login],
+    entities: [User, employ, student, Teacher, UserProfile, Login, Library], 
     migrations: [],
     subscribers: [],
 })

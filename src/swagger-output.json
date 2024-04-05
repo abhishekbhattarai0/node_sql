@@ -18,6 +18,10 @@
     {
       "name": "teacher",
       "description": ""
+    },
+    {
+      "name": "UserProfile",
+      "description": ""
     }
   ],
   "paths": {
@@ -218,6 +222,105 @@
           }
         }
       }
+    },
+    "/userprofile/": {
+      "get": {
+        "tags": [
+          "UserProfile"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UserProfile"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#components/schemas/UserProfileSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/userprofile/{id}": {
+      "get": {
+        "tags": [
+          "student"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "student"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "student"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -263,6 +366,32 @@
           "firstName",
           "lastName"
         ]
+      },
+      "UserProfileSchema": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "firstName"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "lastName"
+          },
+          "age": {
+            "type": "number",
+            "example": 22
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "password"
+        ]
       }
     },
     "examples": {
@@ -281,6 +410,14 @@
           "age": 29
         },
         "summary": "Examples of Teachers"
+      },
+      "UserProfileExample": {
+        "value": {
+          "firstName": "Ashish",
+          "lastName": "Pantha",
+          "age": 29,
+          "$password": "password"
+        }
       }
     }
   }

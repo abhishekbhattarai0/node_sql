@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from "typeorm"
+import { employ } from "./employ"
 
 @Entity() //define as table
 export class student {
@@ -25,4 +26,7 @@ export class student {
 
     @UpdateDateColumn()
     updatedAt: Date
+
+    @OneToMany( ()=> employ,(employ)=> employ.student,{cascade:true, eager:true},)
+    employ: employ[]
 }

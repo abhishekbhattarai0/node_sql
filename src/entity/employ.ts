@@ -1,10 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm"
+import { student } from "./student"
 
 @Entity()
 export class employ {
 
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column()
     firstName: string
@@ -15,4 +16,8 @@ export class employ {
     @Column()
     age: number
 
+    @ManyToOne( ()=> student,(student)=>student.employ)
+    student: student
+
+    
 }

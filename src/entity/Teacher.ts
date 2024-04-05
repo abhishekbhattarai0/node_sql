@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm"
-
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToOne, JoinColumn } from "typeorm"
+import { student } from "./student"
+import { Library } from "./Library"
 @Entity() //define as table
 export class Teacher {
 
@@ -26,6 +27,14 @@ export class Teacher {
 
     @UpdateDateColumn()
     updatedAt: Date
+
+    @OneToOne(()=>student)
+    @JoinColumn()
+    student:student
+    
+    @OneToOne(()=> Library)
+    @JoinColumn()
+    teacher: Library
 
     
 }
