@@ -15,6 +15,7 @@ import TeacherRoutes from './routes/teacherRoutes'
 import UserProfileRoutes from './routes/UserProfileRoutes'
 import LoginRoute from './routes/LoginRoute'
 import LibraryRoute from './routes/LibraryRoute'
+import EmployRoute from './routes/EmployRoute'
 
 import { AppError } from "./utils/AppError"
 
@@ -44,6 +45,8 @@ AppDataSource.initialize().then(async () => {
     app.use(LoginRoute)
 
     app.use(LibraryRoute)
+
+    app.use(EmployRoute)
 
     // swagger
     app.use('/api',swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerFile))

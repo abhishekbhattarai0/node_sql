@@ -67,7 +67,8 @@ const doc = {
                 age: 29,
                 $password:"password"
                 }
-            }
+            },
+            
         }
     },
     host: 'localhost:3000',

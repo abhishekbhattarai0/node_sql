@@ -260,7 +260,7 @@
     "/userprofile/{id}": {
       "get": {
         "tags": [
-          "student"
+          "UserProfile"
         ],
         "description": "",
         "parameters": [
@@ -281,7 +281,7 @@
       },
       "delete": {
         "tags": [
-          "student"
+          "UserProfile"
         ],
         "description": "",
         "parameters": [
@@ -302,7 +302,7 @@
       },
       "patch": {
         "tags": [
-          "student"
+          "UserProfile"
         ],
         "description": "",
         "parameters": [

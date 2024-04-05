@@ -87,7 +87,7 @@ export const postData = async (req: Request ,res: Response, next: NextFunction )
 }
 
 export const getSingleData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['UserProfile']
     try {
         console.log(req.body)
         console.log(req.params)
@@ -111,7 +111,7 @@ export const getSingleData = async (req: Request ,res: Response, next: NextFunct
 }
 
 export const deleteData = async (req: Request, res:Response, next: NextFunction) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['UserProfile']
     try {
         let Data = await UserProfileRepo.findOneBy({id:req.params.id});
 
@@ -135,7 +135,7 @@ export const deleteData = async (req: Request, res:Response, next: NextFunction)
 
 
 export const updateData = async (req: Request ,res: Response, next: NextFunction ) => {
-    // #swagger.tags = ['student']
+    // #swagger.tags = ['UserProfile']
     try {
         
        let data = await UserProfileRepo.findOneBy({id:req.params.id});
