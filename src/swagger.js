@@ -71,7 +71,7 @@ const doc = {
             
         }
     },
-    host: 'localhost:3000',
+    host: 'https://node-mysql-134e.onrender.com',
     
 }
 
